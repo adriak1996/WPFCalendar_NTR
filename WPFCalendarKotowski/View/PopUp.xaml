@@ -1,0 +1,63 @@
+﻿<Window x:Class="WPFCalendarKotowski.View.PopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WPFCalendarKotowski.ViewModel"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="Visual Settings" Height="300" Width="300">
+
+    <Window.DataContext>
+        <vm:CalendarViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0.5,0.5,0.5,0.5" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Border.CornerRadius" Value="15,15,15,15" />
+                <Setter Property="FontStyle" Value="{Binding FontStyle, Mode = OneWay}"/>
+                <Setter Property="Background" Value="{Binding ButtonColor, Mode = OneWay}"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0.5,0.5,0.5,0.5" />
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontStyle" Value="{Binding FontStyle, Mode = OneWay}"/>
+            </Style>
+        </Grid.Resources>
+            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Set color style for calendar" Grid.Column="1" Grid.Row="1" Margin="0,0,0,1" Grid.ColumnSpan="3"></Label>
+        <Button Content="Azure" Grid.Column="1" Grid.Row="2" Background="Azure" Margin="0,0,0,1" Command="{Binding GetAzureCSS}"></Button>
+        <Button Content="Gold" Grid.Column="2" Grid.Row="2" Background="Gold" Margin="0,0,0,1" Command="{Binding GetGoldCSS}"></Button>
+        <Button Content="LightGreen" Grid.Column="3" Grid.Row="2" Background="LightGreen" Margin="0,0,0,1" Command="{Binding GetGreenCSS}"></Button>
+
+        <Label Content="Set font style for calendar" Grid.Column="1" Grid.Row="4" Margin="0,0,0,1"  Grid.ColumnSpan="3"></Label>
+        <Button x:Name="b1" Content="Normal" Grid.Column="1" Grid.Row="5" FontStyle="Normal" Margin="0,0,0,1" Command="{Binding GetNormal}"></Button>
+        <Button x:Name="b2" Content="Italic" Grid.Column="2" Grid.Row="5" FontStyle="Italic" Margin="0,0,0,1" Command="{Binding GetItalics}"></Button>
+        <Button x:Name="b3" Content="Oblique" Grid.Column="3" Grid.Row="5" FontStyle="Oblique" Margin="0,0,0,1" Command="{Binding GetOblique}"></Button>
+
+    </Grid>
+</Window>

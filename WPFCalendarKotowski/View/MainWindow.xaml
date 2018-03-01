@@ -1,0 +1,1073 @@
+﻿<Window x:Name="Calendar"  x:Class="WPFCalendarKotowski.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WPFCalendarKotowski.ViewModel"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+         
+        mc:Ignorable="d"
+        Title="{Binding Path=Titletext, Mode=TwoWay}" Height="600" Width="1200">
+
+    <Window.DataContext>
+        <vm:CalendarViewModel />
+    </Window.DataContext>
+
+
+    <Grid x:Name = "CalendarViewControl" Loaded="ViewLoad">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseRightButtonUp"  >
+                <i:InvokeCommandAction Command="{Binding ShowPopUp}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0.5,0.5,0.5,0.5" />
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Border.CornerRadius" Value="15,15,15,15" />
+                <Setter Property="FontStyle" Value="{Binding FontStyle, Mode = OneWay}"/>
+                <Setter Property="Background" Value="{Binding ButtonColor, Mode = OneWay}"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="0.5,0.5,0.5,0.5" />
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Background" Value="{Binding Color, Mode = OneWay}"/>
+                <Setter Property="FontStyle" Value="{Binding FontStyle, Mode = OneWay}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="prev1"  Command="{Binding GoPrev}"  Grid.Column="0" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Prev</Button>
+        <Button x:Name="prev2"  Command="{Binding GoPrev}"  Grid.Column="0" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Prev</Button>
+        <Button x:Name="next1"  Command="{Binding GoNext}" Grid.Column="8" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Next</Button>
+        <Button x:Name="next2"  Command="{Binding GoNext}" Grid.Column="8" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Next</Button>
+
+        <Label Grid.Column="1" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Monday</Label>
+        <Label Grid.Column="2" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Tuesday</Label>
+        <Label Grid.Column="3" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Wednsday</Label>
+        <Label Grid.Column="4" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Thursday</Label>
+        <Label Grid.Column="5" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Friday</Label>
+        <Label Grid.Column="6" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Saturday</Label>
+        <Label Grid.Column="7" Grid.Row="0" Margin="0.5,0.5,0.5,0.5">Sunday</Label>
+
+        <Label Grid.Column="1" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Monday</Label>
+        <Label Grid.Column="2" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Tuesday</Label>
+        <Label Grid.Column="3" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Wednsday</Label>
+        <Label Grid.Column="4" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Thursday</Label>
+        <Label Grid.Column="5" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Friday</Label>
+        <Label Grid.Column="6" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Saturday</Label>
+        <Label Grid.Column="7" Grid.Row="5" Margin="0.5,0.5,0.5,0.5">Sunday</Label>
+
+        <Label Grid.Column="0" Content="{Binding Days[3].WeekOfYear}" Grid.Row="1" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="0" Content="{Binding Days[10].WeekOfYear}" Grid.Row="2" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="0" Content="{Binding Days[17].WeekOfYear}" Grid.Row="3" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="0" Content="{Binding Days[24].WeekOfYear}" Grid.Row="4" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+
+        <Label Grid.Column="8" Content="{Binding Days[3].WeekOfYear}" Grid.Row="1" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="8" Content="{Binding Days[10].WeekOfYear}" Grid.Row="2" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="8" Content="{Binding Days[17].WeekOfYear}" Grid.Row="3" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+        <Label Grid.Column="8" Content="{Binding Days[24].WeekOfYear}" Grid.Row="4" Margin="0.5,0.5,0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[0].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[0].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[0]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[0].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv1" Grid.Column="0"  ItemsSource="{Binding Days[0].ListElements}" Grid.Row="1" SelectionMode="Single" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp"  >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv1,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}">
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[1].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[1].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[1]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[1].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv2" Grid.Column="0"  ItemsSource="{Binding Days[1].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv2,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[2].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[2].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[2]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[2].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv3" Grid.Column="0"  ItemsSource="{Binding Days[2].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv3,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="4" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[3].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[3].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[3]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[3].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv4" Grid.Column="0"  ItemsSource="{Binding Days[3].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv4,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="5" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[4].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[4].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[4]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[4].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv5" Grid.Column="0"  ItemsSource="{Binding Days[4].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv5,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="6" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[5].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[5].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[5]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[5].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv6" Grid.Column="0"  ItemsSource="{Binding Days[5].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv6,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="7" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[6].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[6].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[6]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[6].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv7" Grid.Column="0"  ItemsSource="{Binding Days[6].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv7,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[7].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[7].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[7]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[7].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv8" Grid.Column="0"  ItemsSource="{Binding Days[7].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp"  >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv8,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[8].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[8].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[8]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[8].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv9" Grid.Column="0"  ItemsSource="{Binding Days[8].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv9,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="3" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[9].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[9].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[9]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[9].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv10" Grid.Column="0"  ItemsSource="{Binding Days[9].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv10,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="4" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[10].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[10].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[10]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[10].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv11" Grid.Column="0"  ItemsSource="{Binding Days[10].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv11,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="5" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[11].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[11].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[11]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[11].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv12" Grid.Column="0"  ItemsSource="{Binding Days[11].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv12,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="6" Grid.Row="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[12].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[12].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[12]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[12].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv13" Grid.Column="0"  ItemsSource="{Binding Days[12].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv13,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="7" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[13].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[13].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[13]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[13].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv14" Grid.Column="0"  ItemsSource="{Binding Days[13].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv14,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[14].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[14].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[14]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[14].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv15" Grid.Column="0"  ItemsSource="{Binding Days[14].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp"  >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv15,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[15].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[15].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[15]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[15].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv16" Grid.Column="0"  ItemsSource="{Binding Days[15].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv16,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="3" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[16].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[16].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[16]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[16].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv17" Grid.Column="0"  ItemsSource="{Binding Days[16].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv17,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
+        <Grid Grid.Column="4" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[17].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[17].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[17]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[17].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv18" Grid.Column="0"  ItemsSource="{Binding Days[17].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv18,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="5" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[18].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[18].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[18]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[18].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv19" Grid.Column="0"  ItemsSource="{Binding Days[18].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv19,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="6" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[19].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[19].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[19]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[19].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv20" Grid.Column="0"  ItemsSource="{Binding Days[19].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv20,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="7" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[20].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[20].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[20]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[20].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv21" Grid.Column="0"  ItemsSource="{Binding Days[20].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv21,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[21].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[21].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[21]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[21].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv22" Grid.Column="0"  ItemsSource="{Binding Days[21].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp"  >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv22,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[22].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[22].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[22]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[22].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv23" Grid.Column="0"  ItemsSource="{Binding Days[22].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv23,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="3" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[23].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[23].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[23]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[23].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv24" Grid.Column="0"  ItemsSource="{Binding Days[23].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv24,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="4" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[24].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[24].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[24]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[24].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv25" Grid.Column="0"  ItemsSource="{Binding Days[24].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv25,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="5" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[25].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[25].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[25]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[25].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv26" Grid.Column="0"  ItemsSource="{Binding Days[25].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv26,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="6" Grid.Row="4" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[26].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[26].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[26]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[26].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv27" Grid.Column="0"  ItemsSource="{Binding Days[26].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv27,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="7" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderBrush" Value="{Binding Days[27].DayColor, Mode=OneWay}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Foreground" Value="{Binding Days[27].DayColor, Mode=OneWay}"/>
+                </Style>
+            </Grid.Resources>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding AddNewEvent}"  CommandParameter="{Binding Days[27]}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Label Content = "{Binding Path = Days[27].ShortName, Mode = OneWay}" Grid.Column="0" Grid.Row="0"></Label>
+            <ListView  x:Name="lv28" Grid.Column="0"  ItemsSource="{Binding Days[27].ListElements}" Grid.Row="1" SelectionMode="Single">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                        <i:InvokeCommandAction Command="{Binding EditDeleteEvent}" CommandParameter="{Binding ElementName=lv28,Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullText, Mode=TwoWay}" >
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+    </Grid>
+</Window>
